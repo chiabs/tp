@@ -95,6 +95,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public long count() {
+        return addressBook.count();
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }
