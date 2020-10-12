@@ -152,7 +152,7 @@ Format: `count`
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from the Hospify.
 
 Format: `clear`
 
@@ -164,7 +164,7 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Hospify data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Archiving data files `[coming in v2.0]`
 
