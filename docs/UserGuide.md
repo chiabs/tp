@@ -24,13 +24,13 @@ Hospify is a desktop app for a digital medical record management solution.
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all contacts.
+   * **`list`** : Lists all patients.
 
-   * **`add`**`n/John Doe ic/S1234567A p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * **`add`**` n/John Doe ic/S1234567A p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+   * **`delete`**`3` : Deletes the 3rd patient shown in the current list.
 
-   * **`clear`** : Deletes all contacts.
+   * **`clear`** : Deletes all patients.
 
    * **`exit`** : Exits the app.
 
@@ -69,7 +69,7 @@ Format: `help`
 
 ### Adding a patient : `add`
 
-Adds a patient to the address book.
+Adds a patient to Hospify.
 
 Format: `add n/NAME ic/S1234567A p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
@@ -83,13 +83,13 @@ Examples:
 
 ### Listing all patients : `list`
 
-Shows a list of all patients in the address book.
+Shows a list of all patients in Hospify.
 
 Format: `list`
 
 ### Editing a patient : `edit`
 
-Edits an existing patient in the address book.
+Edits an existing patient in Hospify.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
@@ -106,25 +106,27 @@ Examples:
 
 ### Locating patients by name: `find`
 
-Finds patients whose names contain any of the given keywords.
+Finds patients whose names contain any of the given keywords or has the same NRIC provided.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive. e.g `hans` will match `Hans`. e.g `s1111111a` will match `S1111111A`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
+* Only the name and NRIC is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
+* Only full NRICs will be matched e.g. `S11111` will not match `S1111111A`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
 * `find John` returns `john` and `John Doe`
+* `find S0000001A` returns patient with NRIC of S0000001A
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a patient : `delete`
 
-Deletes the specified patient from the address book.
+Deletes the patient specified by either index or NRIC from Hospify.
 
 Format: `delete INDEX`
 
@@ -132,9 +134,15 @@ Format: `delete INDEX`
 * The index refers to the index number shown in the displayed patient list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
+Format: `delete NRIC`
+
+* Deletes the patient with matching `NRIC`.
+* The NRIC must be a valid NRIC and not a partial one.
+
 Examples:
-* `list` followed by `delete 2` deletes the 2nd patient in the address book.
+* `list` followed by `delete 2` deletes the 2nd patient in Hospify.
 * `find Betsy` followed by `delete 1` deletes the 1st patient in the results of the `find` command.
+* `delete S1111111A` deletes the patient with NRIC S1111111A in Hospify.
 
 ### Counting total number of patients : `count`
 
@@ -144,7 +152,7 @@ Format: `count`
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from Hospify.
 
 Format: `clear`
 
@@ -156,7 +164,7 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Hospify data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Archiving data files `[coming in v2.0]`
 
@@ -177,9 +185,9 @@ Action | Format, Examples
 --------|------------------
 **Add** | `add n/NAME ic/NRIC p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho ic/S1234567A p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Delete** | `delete INDEX/ NRIC`<br> e.g., `delete 3` , `delete S0000001A`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake` , `find S0000001A`
 **List** | `list`
 **Help** | `help`
 **Count** | `count`
